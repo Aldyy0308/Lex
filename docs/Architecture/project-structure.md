@@ -28,11 +28,14 @@ this document under `docs/Architecture/`. Nothing under the existing scaffold
 (`App.tsx`, `index.ts`, `app.json`, `package.json`, `tsconfig.json`) was modified —
 the app's launch behavior is unchanged.
 
-**Explicitly deferred:** `app/` (Expo Router presentation layer), `supabase/`
-(migrations/functions), and any per-domain subfolders (`src/domains/auth`,
-`src/domains/catalog`, etc.) were left out of this pass. They weren't named in the
-scope for this step, and creating them now would mean guessing at their internal
-shape before the domain or the routing library adoption is actually decided.
+**Explicitly deferred:** `supabase/` (migrations/functions) and any per-domain
+subfolders (`src/domains/auth`, `src/domains/catalog`, etc.) were left out of this
+pass. They weren't named in the scope for this step, and creating them now would
+mean guessing at their internal shape before the domain is actually decided.
+
+> **Update (T-001):** `app/` (Expo Router) has since been introduced. See
+> [`routing.md`](./routing.md) for the routing layer's structure and boundary
+> rules.
 
 ---
 
@@ -164,6 +167,9 @@ first entry.
   change.
 - **Future implications:** routing/navigation adoption is now a clearly-scoped,
   standalone next step rather than bundled into this one.
+
+> **Superseded by T-001:** this deferral is resolved — `app/` now exists. See
+> [`routing.md`](./routing.md).
 
 ### Decision: README.md as the placeholder file, not index.ts
 - **Reason:** none of these folders export anything yet. An empty `index.ts` would

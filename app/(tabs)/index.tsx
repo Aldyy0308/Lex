@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>LexIQ</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.title}>Home</Text>
+      <Text style={styles.subtitle}>
+        The home experience will be implemented in a future task.
+      </Text>
     </View>
   );
 }
@@ -13,8 +14,16 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666',
   },
 });

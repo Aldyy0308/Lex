@@ -1,7 +1,8 @@
 # LexIQ — Routing (Expo Router)
 
-**Status as of this document:** routing foundation only. One route (`/`)
-rendering a placeholder. No auth-gated routes, tab structure, or route groups
+**Status as of this document:** bottom tab shell established. Four tab
+routes (`Home`, `Practice`, `Statistics`, `Profile`), each a placeholder
+screen. No auth-gated routes or route groups beyond the `(tabs)` group
 exist yet.
 
 Supersedes the "explicitly deferred" note on `app/` in
@@ -11,10 +12,15 @@ Supersedes the "explicitly deferred" note on `app/` in
 
 ## What exists
 
-- `app/_layout.tsx` — root layout, renders `<Stack />` (a thin
-  `expo-router` wrapper over `@react-navigation/native-stack`). Every route
-  under `app/` renders inside this.
-- `app/index.tsx` — the `/` route. Placeholder content only (`"LexIQ"` text).
+- `app/_layout.tsx` — root layout, renders a `<Stack />` containing a single
+  `(tabs)` screen with `headerShown: false` (the tab navigator supplies its
+  own per-screen headers).
+- `app/(tabs)/_layout.tsx` — the tab navigator, renders `<Tabs />` (a thin
+  `expo-router` wrapper over `@react-navigation/bottom-tabs`) with four
+  `Tabs.Screen` entries: `index` (Home), `practice`, `statistics`, `profile`.
+- `app/(tabs)/index.tsx`, `practice.tsx`, `statistics.tsx`, `profile.tsx` —
+  the four tab routes. Each renders only a title and a placeholder subtitle;
+  no styling beyond centering.
 - Entry point: `package.json`'s `main` is `"expo-router/entry"`. There is no
   project-owned `App.tsx`/`index.ts` anymore — Router owns bootstrapping.
 - `app.json`: `plugins: ["expo-router"]` (Metro route-awareness),
@@ -35,10 +41,8 @@ restructured without forcing domain logic to move.
 
 - Route groups (`app/(auth)/`, `app/(app)/`) for gating authenticated vs.
   public sections — waits on the Auth domain.
-- Tab or drawer navigation at the root — waits on the app's real navigation
-  requirements being designed.
 - `experiments.typedRoutes` — optional; worth enabling once there are enough
   routes for typo risk in route strings to matter.
 
 Full migration rationale and tradeoffs: `.learning/T-001/` (local-only, not
-part of this repo's tracked documentation).
+part of this repo's tracked documentation). Tab shell rationale: `.learning/T-002/`.

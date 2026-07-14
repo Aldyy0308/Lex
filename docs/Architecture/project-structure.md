@@ -37,6 +37,10 @@ mean guessing at their internal shape before the domain is actually decided.
 > [`routing.md`](./routing.md) for the routing layer's structure and boundary
 > rules.
 
+> **Update (T-003):** `src/theme/` and `src/components/ui/` are no longer
+> empty scaffolding — see [`design-system.md`](./design-system.md) for the
+> token set and primitive components now implemented.
+
 ---
 
 ## 2. Architecture Walkthrough

@@ -7,4 +7,9 @@ motion, dark mode support.
 Pure data/constants. No business logic, no components.
 
 ## Status
-No tokens are defined yet.
+Implemented (T-003). Tokens live under `tokens/` (`colors`, `typography`,
+`spacing`, `radius`, `elevation`, `motion`) as plain data — no components. Both
+a light and dark `ColorPalette` are defined. `ThemeProvider`/`useTheme` (React
+Context, not a state management library) read the OS color scheme via
+`useColorScheme()` and expose the resolved `Theme` object to the component
+tree. See `docs/Architecture/design-system.md` for the full rationale.

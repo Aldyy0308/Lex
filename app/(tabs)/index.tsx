@@ -1,29 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { AppText, Screen } from '../../src/components/ui';
+import { spacing } from '../../src/theme';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-      <Text style={styles.subtitle}>
+    <Screen centered style={{ gap: spacing.sm }}>
+      <AppText variant="title">Home</AppText>
+      <AppText variant="body" color="secondary">
         The home experience will be implemented in a future task.
-      </Text>
-    </View>
+      </AppText>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-  },
-});

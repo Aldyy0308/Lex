@@ -8,4 +8,7 @@ Components here must never contain business logic and must never know about a
 specific domain, puzzle type, or Supabase.
 
 ## Status
-No components are implemented yet.
+`ui/` implemented (T-003): `Screen`, `Button`, `Card`, `AppText` — all
+theme-driven via `src/theme`'s `useTheme()`, no inline hardcoded colors/sizes.
+`layout/` not yet created — will be added once a structural (non-atomic) need
+arises. See `docs/Architecture/design-system.md` for the full rationale.

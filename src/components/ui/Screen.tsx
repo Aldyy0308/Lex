@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import { ScrollView, StyleSheet, View, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useTheme } from '../../theme';
@@ -8,23 +8,25 @@ export type ScreenProps = {
   children: ReactNode;
   style?: ViewStyle;
   centered?: boolean;
+  scroll?: boolean;
 };
 
-export function Screen({ children, style, centered = false }: ScreenProps) {
+export function Screen({ children, style, centered = false, scroll = false }: ScreenProps) {
   const theme = useTheme();
+  const contentStyle = [
+    { padding: theme.spacing.lg },
+    scroll ? styles.grow : styles.flex,
+    centered && styles.centered,
+    style,
+  ];
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.colors.background }]}>
-      <View
-        style={[
-          styles.content,
-          { padding: theme.spacing.lg },
-          centered && styles.centered,
-          style,
-        ]}
-      >
-        {children}
-      </View>
+      {scroll ? (
+        <ScrollView contentContainerStyle={contentStyle}>{children}</ScrollView>
+      ) : (
+        <View style={contentStyle}>{children}</View>
+      )}
     </SafeAreaView>
   );
 }
@@ -33,8 +35,11 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  content: {
+  flex: {
     flex: 1,
+  },
+  grow: {
+    flexGrow: 1,
   },
   centered: {
     alignItems: 'center',

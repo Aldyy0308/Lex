@@ -42,8 +42,9 @@ components, no icon set, no animated transitions.
   piece of text in the app should render through this rather than a raw
   `<Text style={...}>`.
 - `Screen` — `SafeAreaView` + padded content container, themed background.
-  `centered` prop toggles a centered-content layout; `style` allows
-  additional layout overrides (e.g. `gap`).
+  `centered` prop toggles a centered-content layout; `scroll` prop (added
+  T-004) swaps the plain `View` for a `ScrollView` for content-heavy
+  screens; `style` allows additional layout overrides (e.g. `gap`).
 - `Card` — themed surface container: `surface` background, `border`,
   `radius.lg`, `spacing.lg` padding, and an `elevation` prop (default
   `low`) selecting a shadow token.
@@ -64,6 +65,9 @@ components, no icon set, no animated transitions.
 - All four tab screens (`app/(tabs)/*.tsx`) render through `Screen` +
   `AppText` exclusively — no `StyleSheet`/raw `<View>`/`<Text>` remain in
   route files.
+- `app/(tabs)/index.tsx` (T-004) is the first screen composing all four
+  primitives together (`Screen`, `Card`, `Button`, `AppText`) into a real
+  layout — see `.learning/T-004/` for the composition rationale.
 
 ---
 

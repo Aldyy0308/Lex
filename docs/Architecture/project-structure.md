@@ -41,6 +41,10 @@ mean guessing at their internal shape before the domain is actually decided.
 > empty scaffolding — see [`design-system.md`](./design-system.md) for the
 > token set and primitive components now implemented.
 
+> **Update (T-006):** `src/services/supabase/` now exists — a validated
+> config and typed client, foundation only (no auth, storage, or database
+> services yet). See [`src/services/README.md`](../../src/services/README.md).
+
 ---
 
 ## 2. Architecture Walkthrough

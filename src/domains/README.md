@@ -19,6 +19,23 @@ before.
   used by Daily Challenge vs. Practice.
 
 ## Status
-No domains are implemented yet. This folder reserves the boundary agreed upon during
-the architecture review. See `docs/Architecture/project-structure.md` for the full
-rationale.
+
+### `src/domains/auth/` (T-007)
+The first implemented domain — Supabase Auth, foundation for gating the rest of the
+app.
+
+- `api/authRepository.ts` — the only file here allowed to import `src/services/supabase`.
+  Wraps `supabase.auth` (`getSession`, `onAuthStateChange`, `signInWithPassword`,
+  `signUp`, `signOut`) and normalizes Supabase's `AuthError` into a plain `Error`.
+- `hooks/AuthProvider.tsx` — `AuthProvider` + `useAuth()`. Owns session state: restores
+  it on mount via `getSession()`, keeps it live via `subscribeToAuthChanges`, and
+  exposes `signIn`/`signUp`/`signOut` plus `isAuthenticated`/`isLoading`.
+- `components/` — `WelcomeScreen`, `SignInScreen`, `SignUpScreen`. Screen-level
+  implementations, composed from `src/components/ui` only; the `app/(auth)/*` route
+  files just import and render these, per `routing.md`'s boundary rule.
+- No `model/` — the domain re-uses Supabase's own `Session`/`User` types rather than
+  duplicating them; nothing here does enough domain-specific shaping to justify a
+  parallel type.
+
+No other domains are implemented yet. See `docs/Architecture/project-structure.md` for
+the full boundary rationale.

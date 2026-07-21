@@ -1,8 +1,8 @@
 # LexIQ — Design System
 
-**Status as of this document:** foundation only. Tokens and four UI
-primitives (`Screen`, `Button`, `Card`, `AppText`) exist. No domain-specific
-components, no icon set, no animated transitions.
+**Status as of this document:** foundation only. Tokens and five UI
+primitives (`Screen`, `Button`, `Card`, `AppText`, `TextField`) exist. No
+domain-specific components, no icon set, no animated transitions.
 
 ---
 
@@ -53,6 +53,13 @@ components, no icon set, no animated transitions.
   opacity change on the `pressed` state — not an `Animated` transition
   (motion tokens aren't invoked here; see the "no animations" boundary
   below).
+- `TextField` (T-007) — labeled `TextInput` wrapper: `overline` label above,
+  theme-colored border/background, `radius.md`, and an optional `error`
+  string that switches the border to `colors.danger` and renders an inline
+  `caption`/`danger` message below. Added specifically because the auth
+  forms (T-007) were the first screens to need free-text input and no
+  primitive existed for it; accepts all native `TextInputProps` so callers
+  set `secureTextEntry`, `autoCapitalize`, `keyboardType`, etc. directly.
 
 ### Wiring
 
@@ -66,8 +73,12 @@ components, no icon set, no animated transitions.
   `AppText` exclusively — no `StyleSheet`/raw `<View>`/`<Text>` remain in
   route files.
 - `app/(tabs)/index.tsx` (T-004) is the first screen composing all four
-  primitives together (`Screen`, `Card`, `Button`, `AppText`) into a real
-  layout — see `.learning/T-004/` for the composition rationale.
+  original primitives together (`Screen`, `Card`, `Button`, `AppText`) into
+  a real layout — see `.learning/T-004/` for the composition rationale.
+- `src/domains/auth/components/*` (T-007) — `WelcomeScreen`, `SignInScreen`,
+  `SignUpScreen` — are the first consumers of `TextField`, composed with
+  `Screen`, `Button`, and `AppText` exactly like any other screen; the
+  design system has no auth-specific variant or branding.
 
 ---
 

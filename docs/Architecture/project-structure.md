@@ -45,6 +45,12 @@ mean guessing at their internal shape before the domain is actually decided.
 > config and typed client, foundation only (no auth, storage, or database
 > services yet). See [`src/services/README.md`](../../src/services/README.md).
 
+> **Update (T-007):** `src/domains/auth/` is the first implemented domain —
+> `api/` (Supabase-backed repository), `hooks/` (`AuthProvider`/`useAuth`),
+> and `components/` (Welcome/Sign In/Sign Up screens). See
+> [`src/domains/README.md`](../../src/domains/README.md) and
+> [`routing.md`](./routing.md) for how it wires into navigation.
+
 ---
 
 ## 2. Architecture Walkthrough

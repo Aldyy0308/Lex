@@ -6,3 +6,5 @@ export { Card } from './Card';
 export type { CardProps } from './Card';
 export { Screen } from './Screen';
 export type { ScreenProps } from './Screen';
+export { TextField } from './TextField';
+export type { TextFieldProps } from './TextField';

@@ -51,6 +51,12 @@ mean guessing at their internal shape before the domain is actually decided.
 > [`src/domains/README.md`](../../src/domains/README.md) and
 > [`routing.md`](./routing.md) for how it wires into navigation.
 
+> **Update (T-008):** `supabase/migrations/` now exists — the initial
+> Postgres schema (`profiles`, `puzzles`, `daily_challenges`,
+> `puzzle_attempts`, `xp_transactions`, `streaks`), with RLS enabled
+> everywhere. No repositories read it yet. See
+> [`database-schema.md`](./database-schema.md).
+
 ---
 
 ## 2. Architecture Walkthrough

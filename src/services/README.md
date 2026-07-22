@@ -28,3 +28,10 @@ A typed client. No query repositories yet — `src/domains/auth/api/authReposito
 - `index.ts` — public exports (`supabase`, `supabaseConfig`, `SupabaseConfig`).
 
 No other services are implemented yet.
+
+### `supabase/migrations/` (T-008)
+The initial database schema — `profiles`, `puzzles`, `daily_challenges`,
+`puzzle_attempts`, `xp_transactions`, `streaks` — lives at the repo root in
+`supabase/migrations/`, not under `src/`. No query repositories exist yet;
+`src/services/supabase/` still only exposes the auth-oriented client. See
+[`docs/Architecture/database-schema.md`](../../docs/Architecture/database-schema.md).

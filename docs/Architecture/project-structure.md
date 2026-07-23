@@ -75,6 +75,14 @@ mean guessing at their internal shape before the domain is actually decided.
 > [`src/engine/README.md`](../../src/engine/README.md) and
 > [`.learning/T-010/README.md`](../../.learning/T-010/README.md).
 
+> **Update (T-011):** `src/session/` is a new folder, added to the original
+> eight — the orchestration layer between the UI and the Puzzle Engine (see
+> its own `### src/session/` entry below). A `PuzzleSession` loads a puzzle,
+> resolves its engine, and is the only thing a future screen may talk to;
+> screens must never import `src/engine` directly. See
+> [`src/session/README.md`](../../src/session/README.md) and
+> [`.learning/T-011/README.md`](../../.learning/T-011/README.md).
+
 ---
 
 ## 2. Architecture Walkthrough
@@ -148,6 +156,22 @@ Environment configuration and feature flags.
 *Why it exists:* keeps environment-dependent values (API URLs, feature toggles) out
 of both business logic and infrastructure code, so neither has to know *how* a value
 was sourced.
+
+### `src/session/` (added T-011)
+The orchestration layer between the UI and the Puzzle Engine — a `PuzzleSession`
+loads a puzzle (via `src/domains/puzzles`), resolves its engine (via
+`src/engine`'s registry), and exposes a UI-agnostic contract (`submitAnswer`,
+`getHint`, `getExplanation`, `getResult`, `getElapsedMs`) for a future screen
+to drive a single puzzle attempt.
+
+*Why it exists as its own folder, not inside `src/engine/` or a domain:* the
+engine must stay usable and testable without knowing anything about sessions,
+timing, or UI (`src/engine/README.md`'s own rule); and no single domain owns
+"running a puzzle" — Practice, Daily Challenge, and any future puzzle-playing
+context all need the same session behavior. A shared, domain-independent
+orchestration layer is what lets "the UI should never communicate directly
+with puzzle engines" be an enforceable import boundary rather than a
+convention someone has to remember.
 
 ### `docs/Architecture/`
 Living documentation of structural and architectural decisions — this file is the

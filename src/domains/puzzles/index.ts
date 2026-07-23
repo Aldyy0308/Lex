@@ -1,4 +1,5 @@
 export type { PuzzleRepository } from './api/puzzleRepository';
+export { resolveEngineForPuzzle } from './api/puzzleEngineResolver';
 export { supabasePuzzleRepository } from './api/supabasePuzzleRepository';
 export type { Puzzle } from './models/Puzzle';
 export { DIFFICULTY_LABELS, DIFFICULTY_LEVELS, isDifficulty } from './types/difficulty';

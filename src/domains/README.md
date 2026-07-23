@@ -64,5 +64,15 @@ logic lives here (that's the Puzzle Engine's and future domains' job).
 See [`.learning/T-009/README.md`](../../.learning/T-009/README.md) (local, not
 pushed) for the full design rationale.
 
+> **Update (T-010):** `types/puzzleType.ts`'s `isPuzzleType` now delegates to
+> `src/engine`'s registry-backed `isRegisteredPuzzleType` instead of checking
+> "is this a non-empty string" — a puzzle type is only valid if a
+> `PuzzleEngine` is actually registered for it. A new
+> `api/puzzleEngineResolver.ts` (`resolveEngineForPuzzle`) resolves a loaded
+> `Puzzle` to its engine through that same registry. This is this domain's
+> one allowed dependency on `src/engine` (`src/domains/README.md`'s own
+> dependency rule, below) — the direction never reverses. See
+> [`.learning/T-010/README.md`](../../.learning/T-010/README.md).
+
 No other domains are implemented yet. See `docs/Architecture/project-structure.md` for
 the full boundary rationale.

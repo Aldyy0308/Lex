@@ -5,6 +5,11 @@
  * `docs/Architecture/database-schema.md`. Invalid rows are rejected rather
  * than passed through with defaults, so a schema drift surfaces immediately
  * instead of silently corrupting a puzzle session.
+ *
+ * As of T-010, `"puzzle_type"` validity (via `isPuzzleType`) is checked
+ * against the engine registry, not just "is it a non-empty string" — a row
+ * naming a puzzle type with no registered `PuzzleEngine` is now rejected
+ * here too, not just deferred to whatever tries to run the puzzle later.
  */
 import type { Puzzle } from '../models/Puzzle';
 import { isDifficulty } from '../types/difficulty';
@@ -35,7 +40,7 @@ export function validatePuzzleRow(row: unknown): Puzzle {
     throw new PuzzleValidationError('"id" must be a non-empty string', row);
   }
   if (!isPuzzleType(row.puzzle_type)) {
-    throw new PuzzleValidationError('"puzzle_type" must be a non-empty string', row);
+    throw new PuzzleValidationError('"puzzle_type" must be a puzzle type with a registered engine', row);
   }
   if (!isDifficulty(row.difficulty)) {
     throw new PuzzleValidationError('"difficulty" must be an integer between 1 and 5', row);

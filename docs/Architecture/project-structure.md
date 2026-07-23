@@ -62,6 +62,19 @@ mean guessing at their internal shape before the domain is actually decided.
 > only (no gameplay/XP/UI). See
 > [`src/domains/README.md`](../../src/domains/README.md).
 
+> **Update (T-010):** `src/engine/` is implemented — a generic
+> `PuzzleEngine` interface, a `PuzzleEngineRegistry` (the runtime source of
+> truth for supported puzzle types), and `CommonLinkEngine` as the
+> reference implementation. **Supersedes** this document's original §2
+> description of `src/puzzles/`: a puzzle type's answer
+> validation/checking/explanation/hint logic now lives in
+> `src/engine/engines/<type>/` (implementing `PuzzleEngine`), not in
+> `src/puzzles/<type>/`. `src/puzzles/<type>/` remains reserved, but scoped
+> to the renderer only. `src/domains/puzzles`'s `isPuzzleType` (T-009) now
+> queries this registry instead of doing a plain string check. See
+> [`src/engine/README.md`](../../src/engine/README.md) and
+> [`.learning/T-010/README.md`](../../.learning/T-010/README.md).
+
 ---
 
 ## 2. Architecture Walkthrough

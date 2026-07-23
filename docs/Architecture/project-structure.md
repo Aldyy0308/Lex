@@ -57,6 +57,11 @@ mean guessing at their internal shape before the domain is actually decided.
 > everywhere. No repositories read it yet. See
 > [`database-schema.md`](./database-schema.md).
 
+> **Update (T-009):** `src/domains/puzzles/` is the second implemented
+> domain — a Supabase-backed repository over `public.puzzles`, data-layer
+> only (no gameplay/XP/UI). See
+> [`src/domains/README.md`](../../src/domains/README.md).
+
 ---
 
 ## 2. Architecture Walkthrough

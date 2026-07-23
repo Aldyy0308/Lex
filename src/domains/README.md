@@ -37,5 +37,32 @@ app.
   duplicating them; nothing here does enough domain-specific shaping to justify a
   parallel type.
 
+### `src/domains/puzzles/` (T-009)
+The second implemented domain — reads the `public.puzzles` table (T-008) via a
+Supabase-backed repository. Data-layer only: no gameplay, XP, or daily challenge
+logic lives here (that's the Puzzle Engine's and future domains' job).
+
+- `types/database.ts` — `PuzzleRow`, the raw snake_case Supabase row shape.
+- `types/puzzleType.ts` — `PuzzleType`, a branded `string` (not a literal union) —
+  deliberately mirrors `puzzles.puzzle_type` being `text`, not an enum; the
+  `src/engine/` registry, not this domain, is meant to be the eventual runtime
+  authority on which types are valid.
+- `types/difficulty.ts` — `Difficulty` (`1 | 2 | 3 | 4 | 5`), matching the
+  `puzzles_difficulty_range` `CHECK` constraint, plus `DIFFICULTY_LABELS`.
+- `models/Puzzle.ts` — the camelCase domain model returned by the repository.
+- `validation/puzzleValidation.ts` — hand-written runtime validation
+  (`validatePuzzleRow`/`validatePuzzleRows`) that doubles as the snake_case →
+  camelCase mapper; rejects malformed rows rather than defaulting them.
+- `api/puzzleRepository.ts` / `api/supabasePuzzleRepository.ts` — the
+  `PuzzleRepository` interface (`getPuzzleById`, `getActivePuzzles`,
+  `getPuzzlesByType`) and its Supabase implementation; the only file here
+  allowed to import `src/services/supabase`.
+- No `hooks/` — nothing yet consumes this repository from a screen, so a
+  data-fetching hook has no real shape to commit to; add one when a puzzle
+  browsing/session UI actually needs it.
+
+See [`.learning/T-009/README.md`](../../.learning/T-009/README.md) (local, not
+pushed) for the full design rationale.
+
 No other domains are implemented yet. See `docs/Architecture/project-structure.md` for
 the full boundary rationale.
